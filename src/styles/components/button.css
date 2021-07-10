@@ -1,0 +1,12 @@
+.round-button{
+    width: 95px;
+    height: 50px;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+.generate-button{
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+}

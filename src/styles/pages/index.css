@@ -1,0 +1,30 @@
+.main-container{
+    padding: 40px;
+}
+.second-part{
+    margin-top: 50px;
+}
+.third-part{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.counter{
+    margin: 10px;
+}
+.counter div{
+    width: 50%;
+    float: left;
+}
+.gr{
+    margin: auto;
+  width: 50%;
+}
+
+
+.table-text-truncat {
+    display: inline-block;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
