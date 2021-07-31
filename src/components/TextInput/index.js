@@ -1,8 +1,7 @@
 import '../../styles/components/input.css';
+import React from 'react';
 
-
-export const Input = ({ label="", type, name, value, onChange }) => {
-
+export const Input = React.memo(({ label = "", type, name, value, onChange }) => {
     return (
         <div className="auth-input-container">
             <label htmlFor="text" className="auth-input-label-container">
@@ -14,10 +13,9 @@ export const Input = ({ label="", type, name, value, onChange }) => {
 
         </div>
     )
-}
+})
 
-export const SmallInput = ({ label, type, name, value, onChange }) => {
-
+export const SmallInput = React.memo(({ label, type, name, value, onChange }) => {
     return (
         <div className="small-input-container">
             <input autoComplete="off" placeholder="" className="small-input" name={name} type={type} value={value} onChange={(event) => onChange(event)} />
@@ -28,4 +26,4 @@ export const SmallInput = ({ label, type, name, value, onChange }) => {
             </label>
         </div>
     )
-}
+})

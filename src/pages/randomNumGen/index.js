@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router'
 import { Row, Col, Container } from 'react-bootstrap';
 
@@ -33,19 +33,19 @@ function RandomNumGen(props) {
 
     let arr = [randomInt, randomFloat, randomAlphaNum];
 
-    const handlePercentObject = (e) => {
+    const handlePercentObject = useCallback((e) => {
         const { name, value } = e.target;
         setPercentObject({ ...percentObject, [name]: value });
-    }
+    }, [percentObject])
 
     const handleShowCounter = (e) => {
         const { name, value } = e.target;
         //setShowCounter({ ...showCounter, [name]: value });
     }
 
-    const handleFilesize = (e) => {
+    const handleFilesize = useCallback((e) => {
         setFilesize(e.target.value);
-    }
+    }, [filesize])
 
     const startCounter = async () => {
         setStart(true);
@@ -69,7 +69,7 @@ function RandomNumGen(props) {
         // It will save from repetitive api call to know the file size
         if (num.length <= 0) return;
         let arrlen = getFileSize(num);
-       // console.log("arr len = ", arrlen, parseFloat(filesize))
+        // console.log("arr len = ", arrlen, parseFloat(filesize))
         if (arrlen > parseFloat(filesize)) {  // check filesize access the size specified by the user
             notify("warning", "Size of the output file reaches to the size specified by the user");
             setStart(false);
@@ -101,14 +101,19 @@ function RandomNumGen(props) {
                 }
                 if (index === 2) {
                     value = String(arr[index](200));
-                    let space = randomInt(0, 10);
+                    let space = randomInt(2, 10);
+                    let leftSpace = Math.floor(space / 2);
+                    let rightSpace = Math.floor(space / 2);
+                    if (space % 2 !== 0) {
+                        rightSpace++;
+                    }
                     setShowCounter({ float: "", numeric: "", alphaNumeric: value });
-                    value = ' '.repeat(space) + value;  // add space
-                    value = value + ' '.repeat(space); //add space
+                    value = ' '.repeat(leftSpace) + value;  // add space
+                    value = value + ' '.repeat(rightSpace); //add space
                 }
                 // save random number to an array to calculate file size
                 setNum(oldArray => [...oldArray, value]);
-            }, 1000);
+            }, 500);
         } else {
             setLoading(false);
             clearInterval(timer);
